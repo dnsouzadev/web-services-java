@@ -1,4 +1,4 @@
-package entities;
+package com.dnsouzadev.webservice.entities;
 
 import java.io.Serial;
 import java.io.Serializable;
