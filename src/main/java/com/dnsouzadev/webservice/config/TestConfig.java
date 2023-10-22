@@ -1,10 +1,6 @@
 package com.dnsouzadev.webservice.config;
 
-import com.dnsouzadev.webservice.entities.Category;
-import com.dnsouzadev.webservice.entities.Order;
-import com.dnsouzadev.webservice.entities.Product;
-import com.dnsouzadev.webservice.entities.User;
-import com.dnsouzadev.webservice.entities.OrderItem;
+import com.dnsouzadev.webservice.entities.*;
 import com.dnsouzadev.webservice.entities.enums.OrderStatus;
 import com.dnsouzadev.webservice.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +55,6 @@ public class TestConfig implements CommandLineRunner {
         Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
         Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 
-        productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
-
         p1.getCategories().add(cat2);
         p2.getCategories().add(cat1);
         p2.getCategories().add(cat3);
@@ -76,5 +70,11 @@ public class TestConfig implements CommandLineRunner {
         OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 
         orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+
+        Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+        o1.setPayment(pay1);
+        System.out.println(o1.getPayment());
+
+        orderRepository.save(o1);
     }
 }
