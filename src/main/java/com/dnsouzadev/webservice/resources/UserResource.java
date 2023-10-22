@@ -25,7 +25,7 @@ public class UserResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Optional<User>> findById(@PathVariable Long id) {
-        Optional<User> obj = service.findById(id);
+        Optional<User> obj = Optional.ofNullable(service.findById(id));
         return ResponseEntity.ok().body(obj);
     }
 

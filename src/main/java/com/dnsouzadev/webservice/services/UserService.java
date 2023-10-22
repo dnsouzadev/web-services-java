@@ -2,6 +2,7 @@ package com.dnsouzadev.webservice.services;
 
 import com.dnsouzadev.webservice.entities.User;
 import com.dnsouzadev.webservice.repositories.UserRepository;
+import com.dnsouzadev.webservice.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,9 @@ public class UserService {
         return repository.findAll();
     }
 
-    public Optional<User> findById(long id) {
-        return repository.findById(id);
+    public User findById(long id) {
+        Optional<User> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User obj) {
